@@ -1,7 +1,7 @@
 show databases;
 create database vit_c;
 use vit_c;
-CREATE table CSE(roll_no int,name varchar(100),Marks int,Phone int,);
+CREATE table CSE(roll_no int,name varchar(100),Marks int,Phone int);
 INSERT into cse values(01,'ABC',75,34356668);
 INSERT into cse values(02,'CDE',64,44356768);
 INSERT into cse values(03,'EFG',80,28336868);
