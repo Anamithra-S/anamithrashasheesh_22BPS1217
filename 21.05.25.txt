@@ -1,0 +1,55 @@
+use vit_c;
+drop table worker;
+CREATE table worker(worker_id int not null primary key auto_increment,first_name char(25),last_name char(25),salary int(15)
+,joining_date datetime,department char(25));
+INSERT INTO Worker
+(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+select * from worker where salary not between 100000 AND 200000;
+select * from Worker where salary between 75000 and 200000 and WORKER_ID not in(1,2,3);
+select min(salary) from worker;
+select max(salary) as HighestSalary from worker;
+select count(*) from worker;
+select sum(salary) from worker;
+select avg(salary) from worker;
+create table customers(customerID int,CustomerName varchar(80),ContactName varchar(80),Address varchar(80),City varchar(25),PostalCode int);
+insert into customers(customerID,CustomerName,ContactName,Address,City,PostalCode) values
+(1,'Alfreds Futterkiste','Maria Anders','Obere Str 57','Berlin',12209),
+(2,'Ana Trujillo Emparedados y helados','Ana Trujillo','Avda. de la Constitución 2222','México D.F.',05021),
+(3,'Antonio Moreno Taquería','Antonio Moreno','Mataderos 2312','Mexico D.F.',05023);
+create table suppliers(SupplierID int,SupplierName varchar(80),ContactName varchar(80),Address varchar(80),City varchar(25),PostalCode int);
+insert into suppliers(SupplierID,SupplierName,ContactName,Address,City,PostalCode) values
+(1,'Exotic Liquid','Charlotte Cooper','49 Gilbert St.','London',10145),
+(2,'New Orleans Cajun Delights','Shelley Burke','P.O. Box 78934','New Orleans',70117),
+(3,'Grandma Kellys Homestead','Regina Murphy','707 Oxford Rd.','Ann Arbor',48104);
+select city from customers union select city from suppliers order by city;
+select * from worker;
+select first_name,salary,
+CASE
+When salary>=300000 THEN 'Rich People'
+When salary<300000 && salary>=100000 then 'middle layer'
+when salary>10000 && salary<100000 then 'Poor People'
+else 'data not found'
+end
+as Status_checked_BasedSalary
+from worker;
+select * from worker where salary<200000 order by salary;
+select * from worker where salary<200000 order by salary desc;
+select last_name,first_name from worker order by last_name desc,first_name asc;
+select * from worker where first_name like '%i%l';
+select * from worker where first_name like '_i%';
+select * from worker where first_name like '%a_a';
+CREATE VIEW Admin_team AS select * from worker where department='Admin' and salary<200000;
+Select * from Admin_team;
+CREATE OR REPLACE VIEW Admin_team_status AS select * from worker where department='Admin' and salary<200000;
+Select * from Admin_team;
+drop view admin_team;
+CREATE VIEW Admin_team AS select * from worker where department='Admin' and salary<200000;
+Select * from Admin_team;
